@@ -4,9 +4,20 @@ import os
 import numpy as np
 import tensorflow as tf
 
+
+#pred is
+#target is
 def mse(pred, target):
     return tf.square(pred-target)/2.
 
+
+#reduce_max => Computes the maximum of elements across dimensions of a tensor.
+#for this method parameters-
+#input_tensor = logits
+#axis = 1  i.e here axis gives the dimensions to reduce
+#method reduce_max reduces the input tensor along the dimensions given in axis and returns the reduced tensor
+#Tensorflow's logit is defined as the output of a neuron(neural network) without applying any activation function
+#reduce_sum => computes the sum of elements across dimensions of a tensor and returns the reduced tensor as output
 def cat_entropy(logits):
     a0 = logits - tf.reduce_max(logits, 1, keep_dims=True)
     ea0 = tf.exp(a0)
