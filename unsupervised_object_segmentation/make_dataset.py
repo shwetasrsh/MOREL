@@ -34,6 +34,7 @@ def make_dataset(env_name):
     # Create and set-up the environment.
     env = make_atari(env_id)
     env = wrap_deepmind(env)
+    #this function configures environment for deepmind style atari
     env.seed(seed)
     set_global_seeds(seed)
 
