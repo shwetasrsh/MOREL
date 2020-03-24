@@ -33,6 +33,15 @@ class ObjectSegmentationNetworkCommon(object):
     def log_image(self, name, img):
         if not self.is_teacher_network and not self.is_step_model:
             tf.summary.image(name, img, max_outputs=1)
+            #tf.summary.image(name, data, step=None, max_outputs=3, description=None) returns true on success, or false if no
+            #summary was emitted because no default summary writer was available
+            #name=>A name for this summary
+            #data=>A tensor representing pixel data with shape [k,h,w,c] where k is the number of images, h and w are the height
+            #and weight of images, and c is the number of channels, which should be 1,2,3 or 4 
+            #step=>castable monotonic step value for this summary
+            #max_outputs=>Optional int or rank-0 integer tensor. Atmost these many images will be emitted at each step. When
+            #more than max_outputs many images are provided, the first max_outputs many images will be used and the rest
+            #silently discarded.
 
     def log_scalar(self, name, value):
         if not self.is_step_model:
