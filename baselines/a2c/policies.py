@@ -1,5 +1,6 @@
 import numpy as np
-import tensorflow as tf
+#import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from baselines.a2c.utils import conv, conv_without_bias, fc, conv_to_fc, batch_to_seq, seq_to_batch, lstm, lnlstm, mse, cat_entropy
 from baselines.common.distributions import make_pdtype
 
