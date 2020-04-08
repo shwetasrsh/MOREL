@@ -8,7 +8,11 @@ import sys
 
 for path in ['src/', 'interpretable-rl/src']:
     if os.path.exists(path):
+        #it enters here only if os.path function returns true and it return true if path refers to an existing path and it 
+        #returns false for broen symbolic links.
+        #it refers to module from the local computer
         sys.path.insert(0, path)
+        #adds an item into the list or array
         break
 
 import gym
@@ -25,6 +29,12 @@ def make_dataset(env_name):
     #env_id = ['PongNoFrameskip-v4', 'SeaquestNoFrameskip-v4'][1]
     env_id = env_name
     save_path = './data/{}/sfmnet/episodes'.format(env_id)
+    #format function is used to organize data. 
+    #here, syntax : {}.format(value)
+    #The value is what we wish to put into the placeholders and concatenate with the string passed as parameters into the format 
+    #function.
+    #placeholders here is {} within these braces.
+    #So, the formatter returns a formatted string with value passed as parameter in the placeholder position.
     seed = 0
 
     # Track how many frames we have created.
@@ -35,6 +45,8 @@ def make_dataset(env_name):
     env = make_atari(env_id)
     env = wrap_deepmind(env)
     #this function configures environment for deepmind style atari
+    
+    
     env.seed(seed)
     set_global_seeds(seed)
 
