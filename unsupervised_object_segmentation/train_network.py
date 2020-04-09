@@ -6,7 +6,9 @@ os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
 
 import sys
 import json
-
+#the first element of the array sys.argv() is the name of the program itself. sys.argv() is an array for command line arguments 
+#in Python
+#the open function opens a file, when you use the open function, it returns a file object.
 with open(sys.argv[1], 'r') as f:
     hparams = json.load(f)
 
@@ -30,7 +32,9 @@ import copy
 _opencv_path = '/home/v5goel/test_env/env/lib/python3.5/site-packages/'
 if os.path.exists(_opencv_path):
     sys.path.insert(0, _opencv_path)
-
+    #adds _opencv_path at the beginning of the list
+#for accessing the file system we use the os module
+    
 from object_segmentation_network import ObjectSegmentationNetwork, ObjectSegmentationNetworkPredict
 from batch_generator import BatchGenerator
 
@@ -38,7 +42,7 @@ from batch_generator import BatchGenerator
 
 import gym
 hparams['num_actions'] = gym.make(hparams['env_id']).action_space.n
-
+#hparams['env_id'] will give the name of the environment
 if hparams['do_frame_prediction']:
     motion_model = ObjectSegmentationNetworkPredict(hparams=copy.deepcopy(hparams))
 else:
@@ -49,6 +53,8 @@ batch_generator = BatchGenerator(hparams=copy.deepcopy(hparams))
 # Setup for saving checkpoints.
 saver = tf.train.Saver(max_to_keep=3)
 ckpt_dir = os.path.join(hparams['base_dir'], 'ckpts', hparams['experiment_name'])
+#os.path.join() method in Python join one or more path components intelligently. This method concatenates various path 
+#components with exactly one directory separator (‘/’) following each non-empty part except the last path component
 try: os.makedirs(ckpt_dir)
 except: pass
 
@@ -98,7 +104,10 @@ with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) as sess:
                 feed_dict = {}
                 feed_dict[motion_model.frames_placeholder] = frames
                 feed_dict[motion_model.learning_rate] = motion_model.next_learning_rate()
-
+                #placeholders => for the ability to run the same model on different problem set we need placeholders and 
+                #feed dictionaries
+                #placeholders in tensorflow are similar to variables, you do not have to provide an initial value and you can
+                #specify it at runtime with feed_dict argument inside Session.run
                 if hparams.get('pretrain_vf'):
                     feed_dict[motion_model.value_placeholder] = state_values
 
