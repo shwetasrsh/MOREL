@@ -56,6 +56,9 @@ ckpt_dir = os.path.join(hparams['base_dir'], 'ckpts', hparams['experiment_name']
 #os.path.join() method in Python join one or more path components intelligently. This method concatenates various path 
 #components with exactly one directory separator (‘/’) following each non-empty part except the last path component
 try: os.makedirs(ckpt_dir)
+    #os module in python provides functions for interacting with the operating system.
+    #os.makedirs() method in python is used to create a directory recursively. That means while making leaf directory if any
+    #intermediary level directory is missing , os.makedirs will create them all.
 except: pass
 
 # Copy the hparams into the ckpt dir.
